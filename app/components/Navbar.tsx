@@ -10,7 +10,9 @@ import {
 export default function NavbarComponent() {
   return (
     <Navbar maxWidth='full'>
-      <NavbarBrand>mb.ai</NavbarBrand>
+      <NavbarBrand>
+        <Link href='/'>mb.ai</Link>
+      </NavbarBrand>
       <NavbarContent justify='center'>
         <NavbarItem>
           <Link href='/'>Home</Link>
@@ -24,11 +26,17 @@ export default function NavbarComponent() {
       </NavbarContent>
       <NavbarContent justify='end'>
         <NavbarItem className='hidden lg:flex'>
-          <Link href='#'>Login</Link>
+          <Link href='#'>Signup</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color='primary' href='#' variant='flat'>
-            Sign Up
+          <Button
+            as={Link}
+            color='primary'
+            href='#'
+            radius='full'
+            className='text-white'
+          >
+            Login
           </Button>
         </NavbarItem>
       </NavbarContent>
