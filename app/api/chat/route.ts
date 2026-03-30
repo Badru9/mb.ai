@@ -32,6 +32,8 @@ export async function POST(request: NextRequest) {
     },
   });
 
+  console.log('stream', stream);
+
   return new Response(stream, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
