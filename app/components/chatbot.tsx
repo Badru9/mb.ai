@@ -5,6 +5,14 @@ import { PaperPlaneRightIcon } from '@phosphor-icons/react';
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
+
 interface Message {
   role: 'user' | 'assistant';
   content: string;
@@ -66,18 +74,52 @@ const MarkdownRenderer = ({ content }: { content: string }) => (
 );
 
 export default function Chatbot() {
+  const chatbotInputRef = useRef<HTMLInputElement>(null);
+  const inputWrapperRef = useRef<HTMLDivElement>(null);
+
   const [input, setInput] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [streamingContent, setStreamingContent] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  console.log('streamingContent', streamingContent);
-
-  // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, streamingContent]);
+
+  useGSAP(() => {
+    const wrapper = inputWrapperRef.current;
+    if (!wrapper) return;
+
+    gsap.set(wrapper, {
+      scale: 1,
+      opacity: 1,
+      transformOrigin: 'bottom center',
+    });
+
+    ScrollTrigger.create({
+      trigger: '#chatbot-wrapper',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: (self) => {
+        if (self.direction === -1) {
+          gsap.to(wrapper, {
+            scale: 0.75,
+            opacity: 0.5,
+            duration: 0.4,
+            ease: 'power2.out',
+          });
+        } else {
+          gsap.to(wrapper, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+          });
+        }
+      },
+    });
+  });
 
   const handleSubmit = async () => {
     if (!input.trim() || isLoading) return;
@@ -90,7 +132,6 @@ export default function Chatbot() {
     setStreamingContent('');
     setInput('');
 
-    // Send full conversation history to API
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -117,7 +158,6 @@ export default function Chatbot() {
       setStreamingContent(fullResponse);
     }
 
-    // Add assistant message to history
     const assistantMessage: Message = {
       role: 'assistant',
       content: fullResponse,
@@ -128,7 +168,11 @@ export default function Chatbot() {
   };
 
   return (
-    <main className='min-h-screen bg-teal-400 w-full flex flex-col items-center justify-end gap-4 p-4'>
+    <main
+      // ref={chatbotInputRef}
+      id='chatbot-wrapper'
+      className='relative min-h-screen w-full flex flex-col items-center justify-end gap-4 p-4'
+    >
       <div className='w-1/2 flex-1 overflow max-w-none space-y-4 pb-20'>
         {messages.length === 0 && !isLoading ? (
           <p className='text-slate-400 text-lg'>Tanya apapun ke mb.ai! 💬</p>
@@ -185,9 +229,14 @@ export default function Chatbot() {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className='w-1/2 fixed bottom-10 left-0 translate-x-[50%]'>
+      <div
+        ref={inputWrapperRef}
+        className='w-1/2 fixed bottom-10 left-0 translate-x-[50%]'
+      >
         <Input
           label='Curhatin sama mb.ai'
+          ref={chatbotInputRef}
+          id='chatbot-input'
           variant='faded'
           radius='full'
           color='primary'
