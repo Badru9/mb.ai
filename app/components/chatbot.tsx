@@ -5,7 +5,7 @@ import { PaperPlaneRightIcon } from '@phosphor-icons/react';
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import { gsap } from 'gsap';
+import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
