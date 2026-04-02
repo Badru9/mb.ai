@@ -128,12 +128,10 @@ export default function Chatbot() {
   };
 
   return (
-    <main className='min-h-screen w-full flex flex-col items-center justify-end gap-4 p-4'>
-      <div className='w-1/2 flex-1 overflow-y-auto max-w-none space-y-4 pb-4'>
+    <main className='min-h-screen bg-teal-400 w-full flex flex-col items-center justify-end gap-4 p-4'>
+      <div className='w-1/2 flex-1 overflow max-w-none space-y-4 pb-20'>
         {messages.length === 0 && !isLoading ? (
-          <div className='flex items-center justify-center h-full'>
-            <p className='text-slate-400 text-lg'>Tanya apapun ke mb.ai! 💬</p>
-          </div>
+          <p className='text-slate-400 text-lg'>Tanya apapun ke mb.ai! 💬</p>
         ) : (
           <>
             {messages.map((msg, index) => (

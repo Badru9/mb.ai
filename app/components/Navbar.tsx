@@ -18,10 +18,10 @@ export default function NavbarComponent() {
           <Link href='/'>Home</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href='/'>Home</Link>
+          <Link href='/projects'>Projects</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href='/'>Home</Link>
+          <Link href='/about'>About Me</Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end'>
