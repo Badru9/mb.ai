@@ -1,45 +1,21 @@
-import {
-  Button,
-  Link,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from '@heroui/react';
+'use client';
+
+import { Button, Surface, Link } from '@heroui/react';
 
 export default function NavbarComponent() {
   return (
-    <Navbar maxWidth='full'>
-      <NavbarBrand>
-        <Link href='/'>mb.ai</Link>
-      </NavbarBrand>
-      <NavbarContent justify='center'>
-        <NavbarItem>
-          <Link href='/'>Home</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href='/projects'>Projects</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href='/about'>About Me</Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify='end'>
-        <NavbarItem className='hidden lg:flex'>
-          <Link href='#'>Signup</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            as={Link}
-            color='primary'
-            href='#'
-            radius='full'
-            className='text-white'
-          >
-            Login
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+    <Surface className='flex justify-between py-5 px-10 fixed top-0 left-0 right-0 z-50'>
+      <Link href='/' className='no-underline font-bold text-xl'>
+        badru.dev
+      </Link>
+      <div className='flex gap-4 justify-center items-center'>
+        <Link className='no-underline hover:underline' href='/projects'>
+          Projects
+        </Link>
+        <Link className='no-underline hover:underline' href='/about'>
+          About Me
+        </Link>
+      </div>
+    </Surface>
   );
 }
