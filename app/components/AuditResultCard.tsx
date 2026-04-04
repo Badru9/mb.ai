@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardBody, CardHeader, Chip } from '@heroui/react';
+import { Card, Chip } from '@heroui/react';
 import {
   WarningCircleIcon,
   CheckCircleIcon,
@@ -49,9 +49,9 @@ const getStatusIcon = (status: string) => {
 
 const getMetricColor = (
   skor: number,
-): 'success' | 'secondary' | 'warning' | 'danger' => {
+): 'success' | 'default' | 'warning' | 'danger' => {
   if (skor >= 80) return 'success';
-  if (skor >= 60) return 'secondary';
+  if (skor >= 60) return 'default';
   if (skor >= 40) return 'warning';
   return 'danger';
 };
@@ -61,36 +61,36 @@ export default function AuditResultCard({ data }: { data: AuditResult }) {
     <div className='w-full space-y-4'>
       {/* Summary Card */}
       <Card className='bg-gradient-to-r from-slate-800 to-slate-900'>
-        <CardHeader className='flex flex-col items-start px-6 py-4'>
+        <Card.Header className='flex flex-col items-start px-6 py-4'>
           <div className='flex gap-3 items-center w-full'>
             <div className='text-2xl'>{getStatusIcon(data.status)}</div>
             <Chip
-              startContent={getStatusIcon(data.status)}
-              variant='flat'
+              variant='soft'
               color={getStatusColor(data.status)}
               size='lg'
-              className='text-white'
+              className='text-white gap-2'
             >
+              {getStatusIcon(data.status)}
               {data.status}
             </Chip>
           </div>
-        </CardHeader>
-        <CardBody className='px-6 pb-6 pt-0'>
+        </Card.Header>
+        <Card.Content className='px-6 pb-6 pt-0'>
           <p className='text-slate-100 text-base leading-relaxed'>
             {data.summary}
           </p>
-        </CardBody>
+        </Card.Content>
       </Card>
 
       {/* Metrics Card */}
       {data.analysis_metrics && data.analysis_metrics.length > 0 && (
         <Card className='bg-slate-800'>
-          <CardHeader className='flex flex-col items-start px-6 py-4'>
+          <Card.Header className='flex flex-col items-start px-6 py-4'>
             <h3 className='text-lg font-semibold text-slate-100'>
               Analisis Metrik
             </h3>
-          </CardHeader>
-          <CardBody className='px-6 pb-6 gap-4'>
+          </Card.Header>
+          <Card.Content className='px-6 pb-6 gap-4'>
             {data.analysis_metrics.map((metric, index) => (
               <div
                 key={index}
@@ -101,7 +101,7 @@ export default function AuditResultCard({ data }: { data: AuditResult }) {
                     {metric.kategori}
                   </h4>
                   <Chip
-                    variant='flat'
+                    variant='soft'
                     color={getMetricColor(metric.skor)}
                     size='sm'
                     className='font-semibold'
@@ -112,7 +112,7 @@ export default function AuditResultCard({ data }: { data: AuditResult }) {
                 <p className='text-slate-300 text-sm'>{metric.insight}</p>
               </div>
             ))}
-          </CardBody>
+          </Card.Content>
         </Card>
       )}
 
@@ -120,12 +120,12 @@ export default function AuditResultCard({ data }: { data: AuditResult }) {
       {data.development_recommendations &&
         data.development_recommendations.length > 0 && (
           <Card className='bg-slate-800'>
-            <CardHeader className='flex flex-col items-start px-6 py-4'>
+            <Card.Header className='flex flex-col items-start px-6 py-4'>
               <h3 className='text-lg font-semibold text-slate-100'>
                 Rekomendasi Pengembangan
               </h3>
-            </CardHeader>
-            <CardBody className='px-6 pb-6'>
+            </Card.Header>
+            <Card.Content className='px-6 pb-6'>
               <ol className='space-y-3 list-decimal list-inside'>
                 {data.development_recommendations.map(
                   (recommendation, index) => (
@@ -138,18 +138,18 @@ export default function AuditResultCard({ data }: { data: AuditResult }) {
                   ),
                 )}
               </ol>
-            </CardBody>
+            </Card.Content>
           </Card>
         )}
 
       {/* Technical Notes */}
       {data.technical_notes && (
         <Card className='bg-slate-900 border border-slate-700'>
-          <CardBody className='px-6 py-4'>
+          <Card.Content className='px-6 py-4'>
             <p className='text-xs text-slate-400 font-mono'>
               {data.technical_notes}
             </p>
-          </CardBody>
+          </Card.Content>
         </Card>
       )}
     </div>
