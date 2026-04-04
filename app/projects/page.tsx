@@ -22,14 +22,14 @@ const MarkdownRenderer = ({ content }: { content: string }) => (
   <ReactMarkdown
     components={{
       pre: ({ children }) => (
-        <pre className='bg-slate-900 p-4 rounded-lg overflow-x-auto'>
+        <pre className='bg-slate-300 dark:bg-slate-900 p-4 rounded-lg overflow-x-auto'>
           {children}
         </pre>
       ),
       code: ({ children, className }) => {
         const isInline = !className;
         return isInline ? (
-          <code className='bg-slate-200 px-1.5 py-0.5 rounded text-sm text-slate-800'>
+          <code className='bg-slate-300 dark:bg-slate-900 px-1.5 py-0.5 rounded text-sm text-slate-800 dark:text-slate-200'>
             {children}
           </code>
         ) : (
@@ -37,33 +37,45 @@ const MarkdownRenderer = ({ content }: { content: string }) => (
         );
       },
       strong: ({ children }) => (
-        <strong className='font-semibold text-slate-800'>{children}</strong>
+        <strong className='font-semibold text-slate-800 dark:text-slate-200'>
+          {children}
+        </strong>
       ),
       em: ({ children }) => (
-        <em className='italic text-slate-700'>{children}</em>
+        <em className='italic text-slate-700 dark:text-slate-300'>
+          {children}
+        </em>
       ),
       p: ({ children }) => (
-        <p className='text-slate-800 mb-2 last:mb-0'>{children}</p>
+        <p className='text-slate-800 dark:text-slate-200 mb-2 last:mb-0'>
+          {children}
+        </p>
       ),
-      li: ({ children }) => <li className='text-slate-800'>{children}</li>,
+      li: ({ children }) => (
+        <li className='text-slate-800 dark:text-slate-200'>{children}</li>
+      ),
       ol: ({ children }) => (
-        <ol className='list-decimal list-inside text-slate-800 space-y-1'>
+        <ol className='list-decimal list-inside text-slate-800 dark:text-slate-200 space-y-1'>
           {children}
         </ol>
       ),
       ul: ({ children }) => (
-        <ul className='list-disc list-inside text-slate-800 space-y-1'>
+        <ul className='list-disc list-inside text-slate-800 dark:text-slate-200 space-y-1'>
           {children}
         </ul>
       ),
       h1: ({ children }) => (
-        <h1 className='text-xl font-bold text-slate-900 mb-2'>{children}</h1>
+        <h1 className='text-xl font-bold text-slate-900 dark:text-slate-200 mb-2'>
+          {children}
+        </h1>
       ),
       h2: ({ children }) => (
-        <h2 className='text-lg font-bold text-slate-900 mb-2'>{children}</h2>
+        <h2 className='text-lg font-bold text-slate-900 dark:text-slate-200 mb-2'>
+          {children}
+        </h2>
       ),
       h3: ({ children }) => (
-        <h3 className='text-base font-semibold text-slate-900 mb-1'>
+        <h3 className='text-base font-semibold text-slate-900 dark:text-slate-200 mb-1'>
           {children}
         </h3>
       ),
@@ -171,11 +183,13 @@ export default function Chatbot() {
     <main
       // ref={chatbotInputRef}
       id='chatbot-wrapper'
-      className='relative min-h-screen w-full flex flex-col items-center justify-end gap-4 p-4'
+      className='relative min-h-screen w-full flex flex-col items-center justify-end gap-4 p-4 mt-20'
     >
       <div className='w-1/2 flex-1 overflow max-w-none space-y-4 pb-20'>
         {messages.length === 0 && !isLoading ? (
-          <p className='text-slate-400 text-lg'>Tanya apapun ke mb.ai! 💬</p>
+          <p className='text-slate-400 dark:text-slate-600 text-lg'>
+            Tanya apapun ke mb.ai! 💬
+          </p>
         ) : (
           <>
             {messages.map((msg, index) => (
@@ -188,8 +202,8 @@ export default function Chatbot() {
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                     msg.role === 'user'
-                      ? 'bg-primary text-white rounded-br-md'
-                      : 'bg-slate-100 text-slate-800 rounded-bl-md'
+                      ? 'bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 rounded-br-md'
+                      : 'bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md'
                   }`}
                 >
                   {msg.role === 'user' ? (
@@ -206,7 +220,7 @@ export default function Chatbot() {
             {/* Streaming response */}
             {isLoading && streamingContent && (
               <div className='flex justify-start'>
-                <div className='max-w-[80%] rounded-2xl px-4 py-3 bg-slate-100 text-slate-800 rounded-bl-md'>
+                <div className='max-w-[80%] rounded-2xl px-4 py-3 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md'>
                   <div className='prose prose-sm max-w-none'>
                     <MarkdownRenderer content={streamingContent} />
                   </div>
@@ -217,7 +231,7 @@ export default function Chatbot() {
             {/* Loading indicator */}
             {isLoading && !streamingContent && (
               <div className='flex justify-start'>
-                <div className='rounded-2xl px-4 py-3 bg-slate-100 text-slate-400 rounded-bl-md'>
+                <div className='rounded-2xl px-4 py-3 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md'>
                   <span className='animate-pulse'>
                     mb.ai sedang berpikir...
                   </span>
@@ -231,34 +245,29 @@ export default function Chatbot() {
 
       <div
         ref={inputWrapperRef}
-        className='w-1/2 fixed bottom-10 left-0 translate-x-[50%]'
+        className='w-1/2 fixed bottom-10 left-0 translate-x-[50%] flex items-center gap-2'
       >
         <Input
-          label='Curhatin sama mb.ai'
           ref={chatbotInputRef}
+          placeholder='Curhatin sama mb.ai...'
           id='chatbot-input'
-          variant='faded'
-          radius='full'
-          color='primary'
+          fullWidth
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-          endContent={
-            <Button
-              isIconOnly
-              radius='full'
-              variant='light'
-              isDisabled={isLoading}
-              onPress={() => handleSubmit()}
-            >
-              <PaperPlaneRightIcon
-                size={20}
-                weight='bold'
-                className='text-primary'
-              />
-            </Button>
-          }
         />
+        <Button
+          isIconOnly
+          variant='ghost'
+          isDisabled={isLoading}
+          onPress={() => handleSubmit()}
+        >
+          <PaperPlaneRightIcon
+            size={16}
+            weight='bold'
+            className='text-primary'
+          />
+        </Button>
       </div>
     </main>
   );
