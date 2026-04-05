@@ -10,10 +10,7 @@ export default function NavbarComponent() {
       </Link>
       <div className='flex gap-4 justify-center items-center'>
         <Link className='no-underline hover:underline' href='/projects'>
-          Projects
-        </Link>
-        <Link className='no-underline hover:underline' href='/about'>
-          About Me
+          Maybe the Chatbot would be here
         </Link>
       </div>
     </Surface>

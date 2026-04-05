@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Hero from './components/Hero';
 import Lenis from 'lenis';
 import Projects from './components/Projects';
+import About from './components/About';
 
 export default function Home() {
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function Home() {
     <main className='min-h-screen w-full flex flex-col items-center justify-center'>
       <Hero />
       <Projects />
+      <About />
     </main>
   );
 }

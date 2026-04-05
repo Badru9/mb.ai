@@ -183,7 +183,7 @@ export default function Chatbot() {
     <main
       // ref={chatbotInputRef}
       id='chatbot-wrapper'
-      className='relative min-h-screen w-full flex flex-col items-center justify-end gap-4 p-4 mt-20'
+      className='relative w-full flex flex-col items-center justify-end gap-4 p-4 mt-20'
     >
       <div className='w-1/2 flex-1 overflow max-w-none space-y-4 pb-20'>
         {messages.length === 0 && !isLoading ? (
