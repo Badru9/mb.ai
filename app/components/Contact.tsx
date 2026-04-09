@@ -1,7 +1,7 @@
 'use client';
 
 import { useGSAP } from '@gsap/react';
-import { Button, Link } from '@heroui/react';
+import { Link, buttonVariants } from '@heroui/react';
 import {
   GithubLogoIcon,
   LinkedinLogoIcon,
@@ -47,39 +47,42 @@ export default function Contact() {
           have a project in mind or just want to say hi, feel free to reach out!
         </p>
         <div className='flex items-center justify-center gap-5'>
-          <Button
-            isIconOnly
-            variant='outline'
-            size='lg'
-            as={Link}
+          <Link
+            isExternal
             href={`mailto:${process.env.NEXT_PUBLIC_EMAIL_ADDRESS}`}
-            target='_blank'
-            rel='noopener noreferrer'
+            className={buttonVariants({
+              variant: 'outline',
+              size: 'lg',
+              isIconOnly: true,
+            })}
+            aria-label='Email me'
           >
             <MailboxIcon />
-          </Button>
-          <Button
-            isIconOnly
-            variant='outline'
-            size='lg'
-            as={Link}
+          </Link>
+          <Link
+            isExternal
             href='https://github.com/badru9'
-            target='_blank'
-            rel='noopener noreferrer'
+            className={buttonVariants({
+              variant: 'outline',
+              size: 'lg',
+              isIconOnly: true,
+            })}
+            aria-label='Follow me on GitHub'
           >
             <GithubLogoIcon />
-          </Button>
-          <Button
-            isIconOnly
-            variant='outline'
-            size='lg'
-            as={Link}
+          </Link>
+          <Link
+            isExternal
             href='https://www.linkedin.com/in/mohammad-badrujaman-784278259/'
-            target='_blank'
-            rel='noopener noreferrer'
+            className={buttonVariants({
+              variant: 'outline',
+              size: 'lg',
+              isIconOnly: true,
+            })}
+            aria-label='Connect with me on LinkedIn'
           >
             <LinkedinLogoIcon />
-          </Button>
+          </Link>
         </div>
       </div>
     </section>
