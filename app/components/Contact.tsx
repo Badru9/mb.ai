@@ -47,32 +47,38 @@ export default function Contact() {
           have a project in mind or just want to say hi, feel free to reach out!
         </p>
         <div className='flex items-center justify-center gap-5'>
-          <Button isIconOnly variant='outline' size='lg'>
-            <Link
-              href={`mailto:${process.env.NEXT_PUBLIC_EMAIL_ADDRESS}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <MailboxIcon />
-            </Link>
+          <Button
+            isIconOnly
+            variant='outline'
+            size='lg'
+            as={Link}
+            href={`mailto:${process.env.NEXT_PUBLIC_EMAIL_ADDRESS}`}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <MailboxIcon />
           </Button>
-          <Button isIconOnly variant='outline' size='lg'>
-            <Link
-              href='https://github.com/badru9'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <GithubLogoIcon />
-            </Link>
+          <Button
+            isIconOnly
+            variant='outline'
+            size='lg'
+            as={Link}
+            href='https://github.com/badru9'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <GithubLogoIcon />
           </Button>
-          <Button isIconOnly variant='outline' size='lg'>
-            <Link
-              href='https://www.linkedin.com/in/mohammad-badrujaman-784278259/'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <LinkedinLogoIcon />
-            </Link>
+          <Button
+            isIconOnly
+            variant='outline'
+            size='lg'
+            as={Link}
+            href='https://www.linkedin.com/in/mohammad-badrujaman-784278259/'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <LinkedinLogoIcon />
           </Button>
         </div>
       </div>
