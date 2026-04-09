@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { describe, test, expect, mock, beforeEach } from 'bun:test';
 
 // ============================================================
@@ -129,7 +131,10 @@ describe('appendMessage', () => {
 
   test('appends without mutating original array', () => {
     const original: Message[] = [{ role: 'user', content: 'Existing' }];
-    const result = appendMessage(original, { role: 'assistant', content: 'Reply' });
+    const result = appendMessage(original, {
+      role: 'assistant',
+      content: 'Reply',
+    });
     expect(original).toHaveLength(1); // original unchanged
     expect(result).toHaveLength(2);
   });

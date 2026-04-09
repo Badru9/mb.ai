@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Surface, Link } from '@heroui/react';
+import { Link, Surface } from '@heroui/react';
 
 export default function NavbarComponent() {
   return (
@@ -8,11 +8,11 @@ export default function NavbarComponent() {
       <Link href='/' className='no-underline font-bold text-xl'>
         badru.dev
       </Link>
-      <div className='flex gap-4 justify-center items-center'>
+      {/* <div className='flex gap-4 justify-center items-center'>
         <Link className='no-underline hover:underline' href='/projects'>
           Maybe the Chatbot would be here
         </Link>
-      </div>
+      </div> */}
     </Surface>
   );
 }

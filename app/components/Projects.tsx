@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -12,6 +13,7 @@ if (typeof window !== 'undefined') {
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const galleryWrapperRef = useRef<HTMLDivElement>(null);
   const galleryStripRef = useRef<HTMLDivElement>(null);
 
@@ -33,24 +35,32 @@ export default function Projects() {
       link: '/confidential',
       tags: ['ReactJS', 'Laravel', 'MySQL'],
     },
-    // {
-    //   id: '3',
-    //   name: 'Portfolio v3',
-    //   description: 'Personal portfolio with GSAP animations',
-    //   image:
-    //     'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-    //   link: 'https://example.com',
-    //   tags: ['Next.js', 'GSAP', 'Tailwind CSS'],
-    // },
-    // {
-    //   id: '4',
-    //   name: 'Dashboard',
-    //   description: 'Lecturer performance analytics dashboard',
-    //   image:
-    //     'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&q=80',
-    //   link: 'https://example.com',
-    //   tags: ['React', 'HeroUI', 'Charts'],
-    // },
+    {
+      id: '3',
+      name: 'Fotohokkie',
+      description: 'Booking Platform for Photobox',
+      image: 'images/fotohokkie.webp',
+      link: 'https://fotohokkie.id',
+      tags: ['Next.js', 'Tailwind CSS', 'ExpressJS', 'PostgreSQL'],
+    },
+    {
+      id: '4',
+      name: 'Dashboard Fotohokkie',
+      description:
+        'Management Dashboard for Fotohokkie ( Box, Branch, User, Admin, Transaction, Profit, Finance )',
+      image: 'images/dashboard-fotohokkie.webp',
+      link: '/confidential',
+      tags: [
+        'NextJS',
+        'HeroUI',
+        'TailwindCSS',
+        'PostgreSQL',
+        'ExpressJS',
+        'ReactCharts',
+        'JWT',
+        'ReactQuery',
+      ],
+    },
     // {
     //   id: '5',
     //   name: 'E-Commerce',
@@ -74,6 +84,8 @@ export default function Projects() {
       gsap.to(strip, {
         x: () => -scrollDistance,
         ease: 'none',
+        opacity: 1,
+        y: 0,
         scrollTrigger: {
           trigger: wrapper,
           pin: true,
@@ -108,10 +120,26 @@ export default function Projects() {
     { scope: sectionRef, dependencies: [] },
   );
 
+  useGSAP(() => {
+    const title = titleRef.current;
+
+    gsap.to(title, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: title,
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: true,
+      },
+    });
+  }, []);
+
   return (
     <>
       {/* Heading — sits outside pinned section, scrolls naturally */}
-      <div className='w-full px-10 md:px-20'>
+      <div ref={titleRef} className='w-full px-10 md:px-20 opacity-0'>
         <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
           [ Projects ]
         </h2>
@@ -133,7 +161,14 @@ export default function Projects() {
               >
                 {/* Image */}
                 <div className='project-card-image'>
-                  <img src={project.image} alt={project.name} loading='lazy' />
+                  <Image
+                    src={`/${project.image}`}
+                    alt={project.name}
+                    loading='lazy'
+                    width={500}
+                    height={500}
+                    className='w-full h-full object-cover'
+                  />
                 </div>
 
                 {/* Overlay */}

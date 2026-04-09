@@ -1,8 +1,36 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export default function About() {
+  const aboutWrapper = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    const about = aboutWrapper.current;
+
+    gsap.to(about, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: about,
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: true,
+      },
+    });
+  }, []);
+
   return (
     <section
-      id='about'
-      className='w-full flex flex-col items-center justify-center p-10 gap-5'
+      ref={aboutWrapper}
+      className='w-full flex flex-col items-center justify-center p-10 gap-5 opacity-0'
     >
       <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
         [ Get To Know Me ]

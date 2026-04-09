@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Lenis from 'lenis';
 import Projects from './components/Projects';
 import About from './components/About';
+import Contact from './components/Contact';
 
 export default function Home() {
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function Home() {
       <Hero />
       <Projects />
       <About />
+      <Contact />
     </main>
   );
 }
