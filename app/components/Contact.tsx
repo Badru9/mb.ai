@@ -19,16 +19,20 @@ export default function Contact() {
   const contactWrapper = useRef<HTMLDivElement>(null);
   useGSAP(() => {
     const contact = contactWrapper.current;
+    if (!contact) return;
+
+    gsap.set(contact, { opacity: 0, x: 60 });
 
     gsap.to(contact, {
       opacity: 1,
-      y: 0,
+      x: 0,
       duration: 1,
+      ease: 'power2.out',
       scrollTrigger: {
         trigger: contact,
-        start: 'top 100%',
-        end: 'top 50%',
-        scrub: true,
+        start: 'top 85%',
+        end: 'top 40%',
+        scrub: 1,
       },
     });
   }, []);
@@ -36,7 +40,7 @@ export default function Contact() {
   return (
     <section
       ref={contactWrapper}
-      className='w-full flex flex-col items-center justify-center p-10 gap-5 opacity-0'
+      className='w-full flex flex-col items-center justify-center p-10 gap-5'
     >
       <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
         [ Contact ]

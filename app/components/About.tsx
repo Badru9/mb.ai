@@ -13,16 +13,20 @@ export default function About() {
   const aboutWrapper = useRef<HTMLDivElement>(null);
   useGSAP(() => {
     const about = aboutWrapper.current;
+    if (!about) return;
+
+    gsap.set(about, { opacity: 0, x: -60 });
 
     gsap.to(about, {
       opacity: 1,
-      y: 0,
+      x: 0,
       duration: 1,
+      ease: 'power2.out',
       scrollTrigger: {
         trigger: about,
-        start: 'top 80%',
-        end: 'top 20%',
-        scrub: true,
+        start: 'top 85%',
+        end: 'top 40%',
+        scrub: 1,
       },
     });
   }, []);
@@ -30,7 +34,7 @@ export default function About() {
   return (
     <section
       ref={aboutWrapper}
-      className='w-full flex flex-col items-center justify-center p-10 gap-5 opacity-0'
+      className='w-full flex flex-col items-center justify-center p-10 gap-5'
     >
       <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
         [ Get To Know Me ]
