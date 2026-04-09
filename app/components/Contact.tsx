@@ -31,7 +31,7 @@ export default function Contact() {
       scrollTrigger: {
         trigger: contact,
         start: 'top 85%',
-        end: 'top 40%',
+        end: 'top 50%',
         scrub: 1,
       },
     });
@@ -40,7 +40,7 @@ export default function Contact() {
   return (
     <section
       ref={contactWrapper}
-      className='w-full flex flex-col items-center justify-center p-10 gap-5'
+      className='w-full flex flex-col items-center justify-center py-32 px-10 gap-5'
     >
       <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
         [ Contact ]
