@@ -48,37 +48,37 @@ export default function Contact() {
         </p>
         <div className='flex items-center justify-center gap-5'>
           <Link
-            isExternal
             href={`mailto:${process.env.NEXT_PUBLIC_EMAIL_ADDRESS}`}
             className={buttonVariants({
               variant: 'outline',
               size: 'lg',
               isIconOnly: true,
             })}
+            target='_blank'
             aria-label='Email me'
           >
             <MailboxIcon />
           </Link>
           <Link
-            isExternal
             href='https://github.com/badru9'
             className={buttonVariants({
               variant: 'outline',
               size: 'lg',
               isIconOnly: true,
             })}
+            target='_blank'
             aria-label='Follow me on GitHub'
           >
             <GithubLogoIcon />
           </Link>
           <Link
-            isExternal
             href='https://www.linkedin.com/in/mohammad-badrujaman-784278259/'
             className={buttonVariants({
               variant: 'outline',
               size: 'lg',
               isIconOnly: true,
             })}
+            target='_blank'
             aria-label='Connect with me on LinkedIn'
           >
             <LinkedinLogoIcon />
