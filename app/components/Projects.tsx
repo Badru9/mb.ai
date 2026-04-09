@@ -162,7 +162,11 @@ export default function Projects() {
                 {/* Image */}
                 <div className='project-card-image'>
                   <Image
-                    src={`/${project.image}`}
+                    src={
+                      project.image.startsWith('http')
+                        ? project.image
+                        : `/${project.image}`
+                    }
                     alt={project.name}
                     loading='lazy'
                     width={500}
