@@ -19,6 +19,14 @@ export default function Projects() {
 
   const projects: Project[] = [
     {
+      id: '0',
+      name: 'BADRUDEV',
+      description: 'Personal Portfolio Website',
+      image: 'images/badrudev.webp',
+      link: 'https://badrudev.vercel.app',
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GSAP', 'HeroUI'],
+    },
+    {
       id: '1',
       name: 'INTANET',
       description: 'Company Profile Website',
@@ -78,6 +86,11 @@ export default function Projects() {
       const strip = galleryStripRef.current;
       if (!wrapper || !strip) return;
 
+      if (window.matchMedia('(max-width: 767px)').matches) {
+        gsap.set(strip, { clearProps: 'transform' });
+        return;
+      }
+
       const stripWidth = strip.scrollWidth;
       const scrollDistance = stripWidth - window.innerWidth;
 
@@ -94,27 +107,6 @@ export default function Projects() {
           end: () => `+=${stripWidth}`,
           invalidateOnRefresh: true,
         },
-      });
-
-      // Animate each card on entry
-      const cards = strip.querySelectorAll('.project-card');
-      cards.forEach((card) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0.3, scale: 0.9 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            scrollTrigger: {
-              trigger: card,
-              containerAnimation: gsap.getById('horizontalScroll') || undefined,
-              start: 'left 80%',
-              end: 'left 50%',
-              scrub: true,
-            },
-          },
-        );
       });
     },
     { scope: sectionRef, dependencies: [] },
@@ -139,14 +131,17 @@ export default function Projects() {
   return (
     <>
       {/* Heading — sits outside pinned section, scrolls naturally */}
-      <div ref={titleRef} className='w-full px-10 md:px-20 opacity-0'>
-        <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
+      <div ref={titleRef} className='w-full px-5 opacity-0 sm:px-10 md:px-20'>
+        <h2 className='text-2xl font-bold uppercase tracking-tighter sm:text-3xl'>
           [ Projects ]
         </h2>
       </div>
 
       {/* Gallery Section — only this part gets pinned by GSAP */}
-      <section ref={sectionRef} className='relative w-full self-stretch'>
+      <section
+        ref={sectionRef}
+        className='relative w-full self-stretch overflow-hidden'
+      >
         <div ref={galleryWrapperRef} className='horiz-gallery-wrapper'>
           {/* Horizontal strip */}
           <div ref={galleryStripRef} className='horiz-gallery-strip'>
@@ -197,11 +192,11 @@ export default function Projects() {
 
             {/* Outro panel */}
             <div className='gallery-outro'>
-              <div className='flex flex-col items-center justify-center h-full px-8'>
-                <p className='text-muted text-lg uppercase tracking-widest'>
+              <div className='flex h-full flex-col items-center justify-center px-8'>
+                <p className='text-center text-sm uppercase tracking-widest text-muted sm:text-lg'>
                   More coming soon
                 </p>
-                <div className='mt-4 w-12 h-px bg-current opacity-30' />
+                <div className='mt-4 h-px w-12 bg-current opacity-30' />
               </div>
             </div>
           </div>

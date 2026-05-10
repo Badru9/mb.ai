@@ -34,12 +34,12 @@ export default function About() {
   return (
     <section
       ref={aboutWrapper}
-      className='w-full flex flex-col items-center justify-center p-10 gap-5'
+      className='flex w-full flex-col items-center justify-center gap-4 px-5 py-10 sm:gap-5 sm:p-10'
     >
-      <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
+      <h2 className='text-2xl font-bold uppercase tracking-tighter sm:text-3xl'>
         [ Get To Know Me ]
       </h2>
-      <p className='w-1/2 text-justify'>
+      <p className='w-full max-w-3xl text-left text-sm leading-7 text-muted sm:text-base sm:leading-8'>
         I&apos;m a Fullstack Developer with roughly 2 years of experience
         working across the stack — from building user interfaces with React and
         Next.js to setting up APIs and backend logic with Node.js, Express, and

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { describe, test, expect, mock, beforeEach } from 'bun:test';
+import { describe, expect, test } from 'bun:test';
 
 // ============================================================
 // Pure logic extracted from chatbot.tsx — tested independently

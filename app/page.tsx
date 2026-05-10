@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='min-h-screen w-full flex flex-col items-center justify-center pb-20'>
+    <main className='min-h-screen w-full flex flex-col items-center justify-center pb-10 sm:pb-20'>
       <Hero />
       <Projects />
       <About />

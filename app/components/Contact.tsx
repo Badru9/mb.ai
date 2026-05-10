@@ -40,17 +40,17 @@ export default function Contact() {
   return (
     <section
       ref={contactWrapper}
-      className='w-full flex flex-col items-center justify-center py-32 px-10 gap-5'
+      className='flex w-full flex-col items-center justify-center gap-4 px-5 py-16 sm:gap-5 sm:px-10 sm:py-32'
     >
-      <h2 className='text-3xl font-bold tracking-tighter uppercase font-lexend'>
+      <h2 className='text-2xl font-bold uppercase tracking-tighter sm:text-3xl'>
         [ Contact ]
       </h2>
-      <div className='w-1/2 flex flex-col items-center justify-center gap-5'>
-        <p className='text-justify'>
+      <div className='flex w-full max-w-3xl flex-col items-center justify-center gap-4 sm:gap-5'>
+        <p className='text-left text-sm leading-7 text-muted sm:text-base sm:leading-8'>
           I&apos;m always open to new opportunities and collaborations. If you
           have a project in mind or just want to say hi, feel free to reach out!
         </p>
-        <div className='flex items-center justify-center gap-5'>
+        <div className='flex flex-wrap items-center justify-center gap-4 sm:gap-5'>
           <Link
             href={`mailto:${process.env.NEXT_PUBLIC_EMAIL_ADDRESS}`}
             className={buttonVariants({
