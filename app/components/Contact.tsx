@@ -14,7 +14,7 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const EMAIL_ADDRESS = 'mohbadrujaman@gmail.com';
+const EMAIL_ADDRESS = 'mohbadru.dev@gmail.com';
 
 export default function Contact() {
   const contactWrapper = useRef<HTMLDivElement>(null);
@@ -82,5 +82,3 @@ export default function Contact() {
     </section>
   );
 }
-
-const EMAIL_ADDRESS = 'mohbadrujaman@gmail.com';
