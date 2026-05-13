@@ -13,17 +13,13 @@ export default function Home() {
       autoRaf: true,
     });
 
-    lenis.on('scroll', (e) => {
-      console.log(e);
-    });
-
     return () => {
       lenis.destroy();
     };
   }, []);
 
   return (
-    <main className='min-h-screen w-full flex flex-col items-center justify-center pb-10 sm:pb-20'>
+    <main id='main-content' className='min-h-screen w-full flex flex-col items-center justify-center pb-10 sm:pb-20'>
       <Hero />
       <Projects />
       <About />

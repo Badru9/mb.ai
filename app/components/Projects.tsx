@@ -131,7 +131,10 @@ export default function Projects() {
   return (
     <>
       {/* Heading — sits outside pinned section, scrolls naturally */}
-      <div ref={titleRef} className='w-full px-5 opacity-0 sm:px-10 md:px-20'>
+      <div
+        id='projects'
+        className='w-full px-5 opacity-0 sm:px-10 md:px-20 scroll-mt-20'
+      >
         <h2 className='text-2xl font-bold uppercase tracking-tighter sm:text-3xl'>
           [ Projects ]
         </h2>
@@ -164,23 +167,25 @@ export default function Projects() {
                     }
                     alt={project.name}
                     loading='lazy'
-                    width={500}
-                    height={500}
+                    width={400}
+                    height={220}
                     className='w-full h-full object-cover'
                   />
                 </div>
 
-                {/* Overlay */}
-                <div className='project-card-overlay'>
-                  <span className='project-card-index'>
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <h4 className='project-card-title'>{project.name}</h4>
-                  <p className='project-card-description'>
-                    {project.description}
-                  </p>
+                {/* Content */}
+                <div className='project-card-content'>
+                  <div>
+                    <span className='project-card-index'>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h4 className='project-card-title'>{project.name}</h4>
+                    <p className='project-card-description'>
+                      {project.description}
+                    </p>
+                  </div>
                   <div className='project-card-tags'>
-                    {project.tags.map((tag) => (
+                    {project.tags.slice(0, 4).map((tag) => (
                       <span key={tag} className='project-card-tag'>
                         {tag}
                       </span>

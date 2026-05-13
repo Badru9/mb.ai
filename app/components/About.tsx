@@ -34,7 +34,8 @@ export default function About() {
   return (
     <section
       ref={aboutWrapper}
-      className='flex w-full flex-col items-center justify-center gap-4 px-5 py-10 sm:gap-5 sm:p-10'
+      id='about'
+      className='flex w-full flex-col items-center justify-center gap-4 px-5 py-10 sm:gap-5 sm:p-10 scroll-mt-20'
     >
       <h2 className='text-2xl font-bold uppercase tracking-tighter sm:text-3xl'>
         [ Get To Know Me ]
