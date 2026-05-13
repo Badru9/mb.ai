@@ -1,6 +1,6 @@
 'use client';
 
-import { Link, Surface, Button } from '@heroui/react';
+import { Link, Surface } from '@heroui/react';
 import { ListIcon, XIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 
@@ -35,17 +35,14 @@ export default function NavbarComponent() {
           ))}
         </nav>
 
-        <Button
-          isIconOnly
-          variant='light'
-          size='sm'
-          className='md:hidden'
-          onPress={toggleMenu}
+        <button
+          onClick={toggleMenu}
+          className='md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[var(--surface)]'
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isOpen}
         >
           {isOpen ? <XIcon size={24} /> : <ListIcon size={24} />}
-        </Button>
+        </button>
       </div>
 
       {isOpen && (

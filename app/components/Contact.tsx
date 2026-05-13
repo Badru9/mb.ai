@@ -1,7 +1,6 @@
 'use client';
 
 import { useGSAP } from '@gsap/react';
-import { Button } from '@heroui/react';
 import {
   GithubLogoIcon,
   LinkedinLogoIcon,
@@ -15,7 +14,7 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const EMAIL_ADDRESS = 'mohbadru.dev@gmail.com';
+const EMAIL_ADDRESS = 'mohbadrujaman@gmail.com';
 
 export default function Contact() {
   const contactWrapper = useRef<HTMLDivElement>(null);
@@ -53,39 +52,35 @@ export default function Contact() {
           Always open to new opportunities and collaborations. If you have a
           project in mind or just want to say hi, feel free to reach out!
         </p>
-        <Button
-          as='a'
+        <a
           href={`mailto:${EMAIL_ADDRESS}`}
-          variant='outline'
-          size='lg'
-          startContent={<PaperPlaneTiltIcon />}
-          className='min-w-[140px]'
+          className='inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border)] bg-transparent px-6 py-3 text-sm font-medium transition-colors hover:bg-[var(--surface)]'
         >
-          Say Hello
-        </Button>
+          <PaperPlaneTiltIcon /> Say Hello
+        </a>
         <div className='flex flex-wrap items-center justify-center gap-4 sm:gap-5'>
-          <Button
-            as='a'
-            href={`https://github.com/badru9`}
-            variant='outline'
-            size='lg'
-            isIconOnly
+          <a
+            href='https://github.com/badru9'
+            target='_blank'
+            rel='noopener noreferrer'
             aria-label='GitHub Profile'
+            className='inline-flex h-12 w-12 items-center justify-center rounded-lg border border-[var(--border)] transition-colors hover:bg-[var(--surface)]'
           >
-            <GithubLogoIcon className='min-w-5 min-h-5' />
-          </Button>
-          <Button
-            as='a'
+            <GithubLogoIcon className='h-5 w-5' />
+          </a>
+          <a
             href='https://www.linkedin.com/in/mohammad-badrujaman-784278259/'
-            variant='outline'
-            size='lg'
-            isIconOnly
+            target='_blank'
+            rel='noopener noreferrer'
             aria-label='LinkedIn Profile'
+            className='inline-flex h-12 w-12 items-center justify-center rounded-lg border border-[var(--border)] transition-colors hover:bg-[var(--surface)]'
           >
-            <LinkedinLogoIcon className='min-w-5 min-h-5' />
-          </Button>
+            <LinkedinLogoIcon className='h-5 w-5' />
+          </a>
         </div>
       </div>
     </section>
   );
 }
+
+const EMAIL_ADDRESS = 'mohbadrujaman@gmail.com';
