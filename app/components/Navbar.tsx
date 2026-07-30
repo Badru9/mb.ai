@@ -1,8 +1,9 @@
 'use client';
 
-import { Link, Surface } from '@heroui/react';
+import { Button, Link, Surface } from '@heroui/react';
 import { ListIcon, XIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { DownloadSimpleIcon } from '@phosphor-icons/react';
 
 const NAV_LINKS = [
   { label: 'Projects', href: '/#projects' },
@@ -35,14 +36,15 @@ export default function NavbarComponent() {
           ))}
         </nav>
 
-        <button
+        <Button
           onClick={toggleMenu}
-          className='md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[var(--surface)]'
+          variant='ghost'
+          className='md:hidden'
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isOpen}
         >
           {isOpen ? <XIcon size={24} /> : <ListIcon size={24} />}
-        </button>
+        </Button>
       </div>
 
       {isOpen && (
@@ -59,6 +61,13 @@ export default function NavbarComponent() {
           ))}
         </nav>
       )}
+      <Link
+        download='CV-Moh_Badrujaman.pdf'
+        href='/CV-Moh_Badrujaman.pdf'
+        target='_blank'
+      >
+        Download CV
+      </Link>
     </Surface>
   );
 }
