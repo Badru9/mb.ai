@@ -54,7 +54,7 @@ export default function Contact() {
         </p>
         <a
           href={`mailto:${EMAIL_ADDRESS}`}
-          className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border)] bg-transparent px-6 py-3 text-sm font-medium transition-colors hover:bg-[var(--surface)]"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-transparent px-6 py-3 text-sm font-medium transition-colors hover:bg-surface"
         >
           <PaperPlaneTiltIcon /> Say Hello
         </a>
@@ -64,7 +64,7 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-[var(--border)] transition-colors hover:bg-[var(--surface)]"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-border transition-colors hover:bg-surface"
           >
             <GithubLogoIcon className="h-5 w-5" />
           </a>
@@ -73,7 +73,7 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-[var(--border)] transition-colors hover:bg-[var(--surface)]"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-border transition-colors hover:bg-surface"
           >
             <LinkedinLogoIcon className="h-5 w-5" />
           </a>

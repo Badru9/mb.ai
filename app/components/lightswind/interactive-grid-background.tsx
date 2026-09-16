@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/purity */
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
 
-export interface InteractiveGridBackgroundProps
-  extends React.HTMLProps<HTMLDivElement> {
+export interface InteractiveGridBackgroundProps extends React.HTMLProps<HTMLDivElement> {
   gridSize?: number;
   gridColor?: string;
   darkGridColor?: string;
@@ -134,9 +134,9 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
     idlePositionsRef.current = idleTargetsRef.current.map((p) => ({ ...p }));
 
     const draw = () => {
-       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
- 
-       // Idle animation logic
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      // Idle animation logic
       const idleThreshold = 2000;
       if (Date.now() - lastMouseTimeRef.current > idleThreshold) {
         mouseActiveRef.current = false;
@@ -206,7 +206,7 @@ const InteractiveGridBackground: React.FC<InteractiveGridBackgroundProps> = ({
             animationFrameId = requestAnimationFrame(draw);
           }
         },
-        { rootMargin: "150px" }
+        { rootMargin: "150px" },
       );
       observer.observe(container);
     }

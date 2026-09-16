@@ -26,8 +26,8 @@ export default function About() {
       </h2>
       <div className="flex space-x-6">
         <p className="w-full max-w-3xl text-left text-sm leading-7 text-muted sm:text-base sm:leading-8">
-          I'm a fullstack developer with around 2 years of experience. On the
-          frontend I build with React and Next.js, and on the backend I work
+          I&apos;m a fullstack developer with around 2 years of experience. On
+          the frontend I build with React and Next.js, and on the backend I work
           with Node.js, Express, and Laravel. What I like most is digging into
           how things actually work under the hood, then writing code that&apos;s
           easy for the next person (usually future me) to read.
