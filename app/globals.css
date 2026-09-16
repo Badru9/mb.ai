@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin 'lightswind/plugin';
 @plugin '@tailwindcss/typography';
 
 @import '@heroui/styles';
@@ -262,70 +263,6 @@ body {
 }
 
 .project-card-index {
-  font-size: 0.6rem;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  opacity: 0.5;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.project-card-title {
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 0.4rem;
-  color: var(--foreground);
-}
-
-.project-card-description {
-  font-size: 0.72rem;
-  font-weight: 400;
-  opacity: 0.7;
-  line-height: 1.5;
-  margin-bottom: 0.75rem;
-  color: var(--muted);
-}
-
-@media (min-width: 640px) {
-  .project-card-description {
-    font-size: 0.78rem;
-  }
-}
-
-.project-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: auto;
-}
-
-.project-card-tag {
-  font-size: 0.52rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  background: var(--surface-secondary);
-  color: var(--muted-foreground);
-  transition: all 0.2s ease;
-}
-
-@media (min-width: 640px) {
-  .project-card-tag {
-    font-size: 0.55rem;
-    padding: 0.28rem 0.55rem;
-  }
-}
-
-.project-card:hover .project-card-tag {
-  background: var(--accent);
-  color: var(--accent-foreground);
-}
-
-.project-card-index {
   font-size: 0.65rem;
   font-weight: 300;
   letter-spacing: 0.15em;
@@ -432,4 +369,41 @@ body {
 
 .project-card:hover::before {
   opacity: 0.15;
+}
+
+/* ===========================
+   Accessibility: Reduced Motion
+   =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .horiz-gallery-strip {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .project-card {
+    transition: none;
+  }
+
+  .project-card:hover {
+    transform: none;
+  }
+
+  .project-card:hover .project-card-image img {
+    transform: none;
+  }
+
+  .project-card:hover .project-card-link-icon {
+    opacity: 1;
+    transform: none;
+  }
 }

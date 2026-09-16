@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "design-critique": {
+      "source": "slb2248/ai-ux-skills",
+      "ref": "main",
+      "sourceType": "github",
+      "skillPath": "skills/design-critique/SKILL.md",
+      "computedHash": "b1a323e42d6e442ad3c9a6310339e5f96be27263e7656811456d1e7d83c14dec"
+    }
+  }
+}

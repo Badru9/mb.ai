@@ -5,4 +5,6 @@ export interface Project {
   image: string;
   link: string;
   tags: string[];
+  colSpan?: number;
+  rowSpan?: number;
 }

@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { Button, Input } from '@heroui/react';
-import { PaperPlaneRightIcon } from '@phosphor-icons/react';
-import { useState, useRef, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
+import { Button, Input } from "@heroui/react";
+import { PaperPlaneRightIcon } from "@phosphor-icons/react";
+import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 }
 
@@ -22,14 +22,14 @@ const MarkdownRenderer = ({ content }: { content: string }) => (
   <ReactMarkdown
     components={{
       pre: ({ children }) => (
-        <pre className='bg-slate-300 dark:bg-slate-900 p-4 rounded-lg overflow-x-auto'>
+        <pre className="bg-slate-300 dark:bg-slate-900 p-4 rounded-lg overflow-x-auto">
           {children}
         </pre>
       ),
       code: ({ children, className }) => {
         const isInline = !className;
         return isInline ? (
-          <code className='bg-slate-300 dark:bg-slate-900 px-1.5 py-0.5 rounded text-sm text-slate-800 dark:text-slate-200'>
+          <code className="bg-slate-300 dark:bg-slate-900 px-1.5 py-0.5 rounded text-sm text-slate-800 dark:text-slate-200">
             {children}
           </code>
         ) : (
@@ -37,45 +37,45 @@ const MarkdownRenderer = ({ content }: { content: string }) => (
         );
       },
       strong: ({ children }) => (
-        <strong className='font-semibold text-slate-800 dark:text-slate-200'>
+        <strong className="font-semibold text-slate-800 dark:text-slate-200">
           {children}
         </strong>
       ),
       em: ({ children }) => (
-        <em className='italic text-slate-700 dark:text-slate-300'>
+        <em className="italic text-slate-700 dark:text-slate-300">
           {children}
         </em>
       ),
       p: ({ children }) => (
-        <p className='text-slate-800 dark:text-slate-200 mb-2 last:mb-0'>
+        <p className="text-slate-800 dark:text-slate-200 mb-2 last:mb-0">
           {children}
         </p>
       ),
       li: ({ children }) => (
-        <li className='text-slate-800 dark:text-slate-200'>{children}</li>
+        <li className="text-slate-800 dark:text-slate-200">{children}</li>
       ),
       ol: ({ children }) => (
-        <ol className='list-decimal list-inside text-slate-800 dark:text-slate-200 space-y-1'>
+        <ol className="list-decimal list-inside text-slate-800 dark:text-slate-200 space-y-1">
           {children}
         </ol>
       ),
       ul: ({ children }) => (
-        <ul className='list-disc list-inside text-slate-800 dark:text-slate-200 space-y-1'>
+        <ul className="list-disc list-inside text-slate-800 dark:text-slate-200 space-y-1">
           {children}
         </ul>
       ),
       h1: ({ children }) => (
-        <h1 className='text-xl font-bold text-slate-900 dark:text-slate-200 mb-2'>
+        <h1 className="text-xl font-bold text-slate-900 dark:text-slate-200 mb-2">
           {children}
         </h1>
       ),
       h2: ({ children }) => (
-        <h2 className='text-lg font-bold text-slate-900 dark:text-slate-200 mb-2'>
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-200 mb-2">
           {children}
         </h2>
       ),
       h3: ({ children }) => (
-        <h3 className='text-base font-semibold text-slate-900 dark:text-slate-200 mb-1'>
+        <h3 className="text-base font-semibold text-slate-900 dark:text-slate-200 mb-1">
           {children}
         </h3>
       ),
@@ -85,18 +85,18 @@ const MarkdownRenderer = ({ content }: { content: string }) => (
   </ReactMarkdown>
 );
 
-export default function Chatbot() {
+export default function ChatbotContent() {
   const chatbotInputRef = useRef<HTMLInputElement>(null);
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
-  const [input, setInput] = useState<string>('');
+  const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [streamingContent, setStreamingContent] = useState<string>('');
+  const [streamingContent, setStreamingContent] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, streamingContent]);
 
   useGSAP(() => {
@@ -106,27 +106,27 @@ export default function Chatbot() {
     gsap.set(wrapper, {
       scale: 1,
       opacity: 1,
-      transformOrigin: 'bottom center',
+      transformOrigin: "bottom center",
     });
 
     ScrollTrigger.create({
-      trigger: '#chatbot-wrapper',
-      start: 'top top',
-      end: 'bottom bottom',
+      trigger: "#chatbot-wrapper",
+      start: "top top",
+      end: "bottom bottom",
       onUpdate: (self) => {
         if (self.direction === -1) {
           gsap.to(wrapper, {
             scale: 0.75,
             opacity: 0.5,
             duration: 0.4,
-            ease: 'power2.out',
+            ease: "power2.out",
           });
         } else {
           gsap.to(wrapper, {
             scale: 1,
             opacity: 1,
             duration: 0.4,
-            ease: 'power2.out',
+            ease: "power2.out",
           });
         }
       },
@@ -136,17 +136,17 @@ export default function Chatbot() {
   const handleSubmit = async () => {
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = { role: 'user', content: input.trim() };
+    const userMessage: Message = { role: "user", content: input.trim() };
     const updatedMessages = [...messages, userMessage];
 
     setMessages(updatedMessages);
     setIsLoading(true);
-    setStreamingContent('');
-    setInput('');
+    setStreamingContent("");
+    setInput("");
 
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         messages: updatedMessages.map((m) => ({
           role: m.role,
@@ -159,7 +159,7 @@ export default function Chatbot() {
 
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
-    let fullResponse = '';
+    let fullResponse = "";
 
     while (true) {
       const { done, value } = await reader.read();
@@ -171,23 +171,22 @@ export default function Chatbot() {
     }
 
     const assistantMessage: Message = {
-      role: 'assistant',
+      role: "assistant",
       content: fullResponse,
     };
     setMessages((prev) => [...prev, assistantMessage]);
-    setStreamingContent('');
+    setStreamingContent("");
     setIsLoading(false);
   };
 
   return (
     <main
-      // ref={chatbotInputRef}
-      id='chatbot-wrapper'
-      className='relative w-full flex flex-col items-center justify-end gap-4 p-4 mt-20'
+      id="chatbot-wrapper"
+      className="relative w-full flex flex-col items-center justify-end gap-4 p-4 mt-20"
     >
-      <div className='w-1/2 flex-1 overflow max-w-none space-y-4 pb-20'>
+      <div className="w-1/2 flex-1 overflow max-w-none space-y-4 pb-20">
         {messages.length === 0 && !isLoading ? (
-          <p className='text-slate-400 dark:text-slate-600 text-lg'>
+          <p className="text-slate-400 dark:text-slate-600 text-lg">
             Tanya apapun ke mb.ai! 💬
           </p>
         ) : (
@@ -196,20 +195,20 @@ export default function Chatbot() {
               <div
                 key={index}
                 className={`flex ${
-                  msg.role === 'user' ? 'justify-end' : 'justify-start'
+                  msg.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                    msg.role === 'user'
-                      ? 'bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 rounded-br-md'
-                      : 'bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md'
+                    msg.role === "user"
+                      ? "bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 rounded-br-md"
+                      : "bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md"
                   }`}
                 >
-                  {msg.role === 'user' ? (
-                    <p className='whitespace-pre-wrap'>{msg.content}</p>
+                  {msg.role === "user" ? (
+                    <p className="whitespace-pre-wrap">{msg.content}</p>
                   ) : (
-                    <div className='prose prose-sm max-w-none'>
+                    <div className="prose prose-sm max-w-none">
                       <MarkdownRenderer content={msg.content} />
                     </div>
                   )}
@@ -217,22 +216,20 @@ export default function Chatbot() {
               </div>
             ))}
 
-            {/* Streaming response */}
             {isLoading && streamingContent && (
-              <div className='flex justify-start'>
-                <div className='max-w-[80%] rounded-2xl px-4 py-3 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md'>
-                  <div className='prose prose-sm max-w-none'>
+              <div className="flex justify-start">
+                <div className="max-w-[80%] rounded-2xl px-4 py-3 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md">
+                  <div className="prose prose-sm max-w-none">
                     <MarkdownRenderer content={streamingContent} />
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Loading indicator */}
             {isLoading && !streamingContent && (
-              <div className='flex justify-start'>
-                <div className='rounded-2xl px-4 py-3 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md'>
-                  <span className='animate-pulse'>
+              <div className="flex justify-start">
+                <div className="rounded-2xl px-4 py-3 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md">
+                  <span className="animate-pulse">
                     mb.ai sedang berpikir...
                   </span>
                 </div>
@@ -245,27 +242,27 @@ export default function Chatbot() {
 
       <div
         ref={inputWrapperRef}
-        className='w-1/2 fixed bottom-10 left-0 translate-x-[50%] flex items-center gap-2'
+        className="w-1/2 fixed bottom-10 left-0 translate-x-[50%] flex items-center gap-2"
       >
         <Input
           ref={chatbotInputRef}
-          placeholder='Curhatin sama mb.ai...'
-          id='chatbot-input'
+          placeholder="Curhatin sama mb.ai..."
+          id="chatbot-input"
           fullWidth
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+          onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
         />
         <Button
           isIconOnly
-          variant='ghost'
+          variant="ghost"
           isDisabled={isLoading}
           onPress={() => handleSubmit()}
         >
           <PaperPlaneRightIcon
             size={16}
-            weight='bold'
-            className='text-primary'
+            weight="bold"
+            className="text-primary"
           />
         </Button>
       </div>
