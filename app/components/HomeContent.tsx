@@ -29,10 +29,11 @@ export default function HomeContent() {
       <About />
       <Contact />
       <SmoothCursor
-        size={30}
+        size={16}
         rotateOnMove={true}
         scaleOnClick={true}
         glowEffect={true}
+        className="invisible md:visible"
       />
     </main>
   );

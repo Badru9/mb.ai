@@ -1,84 +1,187 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import {
-  GithubLogoIcon,
-  LinkedinLogoIcon,
-  PaperPlaneTiltIcon,
-} from "@phosphor-icons/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { Button, Link, toast } from "@heroui/react";
+import { GithubLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
+import { motion } from "motion/react";
+import { ReactNode } from "react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
+interface SocialTypes {
+  id: number;
+  name: string;
+  href: string;
+  icon: ReactNode;
 }
 
-const EMAIL_ADDRESS = "mohbadru.dev@gmail.com";
-
 export default function Contact() {
-  const contactWrapper = useRef<HTMLDivElement>(null);
-  useGSAP(() => {
-    const contact = contactWrapper.current;
-    if (!contact) return;
+  // const subject = encodeURIComponent(
+  //   "Hello from Your Portfolio – Let's Connect",
+  // );
+  // const body = encodeURIComponent(
+  //   `Hi Badru,\n\nI came across your portfolio and would like to discuss the following:\n\n[Describe your needs/opportunity here]\n\nCould you let me know your availability for a quick chat?\n\nBest regards,\n[Your Name]`,
+  // );
 
-    gsap.set(contact, { opacity: 0, x: 60 });
-
-    gsap.to(contact, {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: contact,
-        start: "top 85%",
-        end: "top 50%",
-        scrub: 1,
-      },
-    });
-  }, []);
+  const socials: SocialTypes[] = [
+    // {
+    //   id: 1,
+    //   name: "Send Email to mohbadru.dev@gmail.com",
+    //   href: `#contact`,
+    //   icon: <PaperPlaneTiltIcon size={48} weight="bold" />,
+    // },
+    {
+      id: 2,
+      name: "GitHub",
+      href: "https://github.com/Badru9",
+      icon: <GithubLogoIcon size={48} weight="bold" />,
+    },
+    {
+      id: 3,
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/mohammad-badrujaman-784278259/",
+      icon: <LinkedinLogoIcon size={48} weight="bold" />,
+    },
+  ];
 
   return (
-    <section
-      ref={contactWrapper}
-      id="contact"
-      className="flex w-full flex-col items-center justify-center gap-4 px-5 py-16 sm:gap-5 sm:px-10 sm:py-32 scroll-mt-20"
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, delay: 0.3 },
+      }}
+      viewport={{ once: true }}
+      className="flex space-x-6"
     >
-      <h2 className="text-2xl font-bold uppercase tracking-tighter sm:text-3xl">
-        [ Contact ]
-      </h2>
-      <div className="flex w-full max-w-3xl flex-col items-center justify-center gap-4 sm:gap-5">
-        <p className="text-left text-sm leading-7 text-muted sm:text-base sm:leading-8">
-          Always open to new opportunities and collaborations. If you have a
-          project in mind or just want to say hi, feel free to reach out!
-        </p>
-        <a
-          href={`mailto:${EMAIL_ADDRESS}`}
-          className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-transparent px-6 py-3 text-sm font-medium transition-colors hover:bg-surface"
+      <motion.section
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, delay: 0.3 },
+        }}
+        viewport={{ once: true }}
+        id="contact"
+        className="flex w-full flex-col items-center justify-center gap-4 px-5 py-16 sm:gap-5 sm:px-10 sm:py-32 scroll-mt-20"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, delay: 0.5 },
+          }}
+          viewport={{ once: true }}
+          className="text-2xl font-bold uppercase tracking-tighter sm:text-3xl"
         >
-          <PaperPlaneTiltIcon /> Say Hello
-        </a>
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-          <a
-            href="https://github.com/badru9"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-border transition-colors hover:bg-surface"
+          [ Social ]
+        </motion.h2>
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: -20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, delay: 0.5 },
+          }}
+          viewport={{ once: true }}
+          className="flex w-full items-center justify-center gap-4 sm:gap-5"
+        >
+          {socials.map((social, index) => (
+            <motion.span
+              key={social.id}
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, delay: 0.5 + index * 0.2 },
+              }}
+              viewport={{ once: true }}
+            >
+              <Link
+                href={social.href}
+                target={social.name === "Send Email" ? "_self" : "_blank"}
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                className="no-underline group "
+              >
+                <Button size="lg" variant="outline">
+                  {social.icon} {social.name}
+                </Button>
+              </Link>
+            </motion.span>
+          ))}
+        </motion.div>
+      </motion.section>
+      <motion.section
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, delay: 0.3 },
+        }}
+        viewport={{ once: true }}
+        id="contact"
+        className="flex w-full flex-col items-center justify-center gap-4 px-5 py-16 sm:gap-5 sm:px-10 sm:py-32 scroll-mt-20"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, delay: 0.5 },
+          }}
+          viewport={{ once: true }}
+          className="text-2xl font-bold uppercase tracking-tighter sm:text-3xl"
+        >
+          [ Contact Me ]
+        </motion.h2>
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: -20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, delay: 0.5 },
+          }}
+          viewport={{ once: true }}
+          className="flex w-full items-center justify-center gap-4 sm:gap-5"
+        >
+          <motion.span
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.5, delay: 0.5 },
+            }}
+            viewport={{ once: true }}
           >
-            <GithubLogoIcon className="h-5 w-5" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/mohammad-badrujaman-784278259/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-border transition-colors hover:bg-surface"
-          >
-            <LinkedinLogoIcon className="h-5 w-5" />
-          </a>
-        </div>
-      </div>
-    </section>
+            <Button
+              size="lg"
+              variant="outline"
+              onPress={() => {
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText("mohbadru.dev@gmail.com");
+
+                  toast("Email Copied to Clipboard!", {
+                    variant: "success",
+                  });
+                } else {
+                  toast("Clipboard API not supported!", {
+                    variant: "danger",
+                  });
+                }
+              }}
+            >
+              Send Email to <strong> mohbadru.dev@gmail</strong> to discuss your
+              needs/opportunity
+            </Button>
+          </motion.span>
+        </motion.div>
+      </motion.section>
+    </motion.div>
   );
 }

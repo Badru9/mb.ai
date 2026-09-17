@@ -64,8 +64,9 @@ export default function NavbarComponent() {
         download="CV-Moh_Badrujaman.pdf"
         href="/CV-Moh_Badrujaman.pdf"
         target="_blank"
+        className="no-underline"
       >
-        Download CV
+        <Button variant="outline">Download CV</Button>
       </Link>
     </Surface>
   );
